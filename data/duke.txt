@@ -1,4 +1,1 @@
-1. [T][✗] hello
-2. [T][✗] hi
-3. [T][✗] hello2
-4. [D][✗] hello | by: 2
+1. [D][✗] hello | by: Dec 10 2019

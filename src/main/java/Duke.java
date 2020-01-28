@@ -4,6 +4,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 
 
 public class Duke {
@@ -32,14 +35,18 @@ public class Duke {
 
             } else if (type.equals("D")) {
                 String substr = sentence.substring(10);
-                String[] deadlineSplit = substr.split(" | by: ");
-                Deadline task = new Deadline(deadlineSplit[0], deadlineSplit[1], done);
+                String[] deadlineSplit = substr.split(" \\| by: ");
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy");
+                LocalDate date = LocalDate.parse(deadlineSplit[1], formatter);
+                Deadline task = new Deadline(deadlineSplit[0], date, done);
                 commandList.add(task);
 
             } else {
                 String substr = sentence.substring(10);
-                String[] eventSplit = substr.split(" | at: ");
-                Event task = new Event(eventSplit[0], eventSplit[1], done);
+                String[] eventSplit = substr.split(" \\| at: ");
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy");
+                LocalDate date = LocalDate.parse(eventSplit[1], formatter);
+                Event task = new Event(eventSplit[0], date, done);
                 commandList.add(task);
 
             }
@@ -159,7 +166,8 @@ public class Duke {
                     String substr = word.substring(9);
                     if (substr.contains(" /")) {
                         String[] deadlineSplit = substr.split(" /");
-                        Deadline task = new Deadline(deadlineSplit[0], deadlineSplit[1]);
+                        LocalDate date = LocalDate.parse(deadlineSplit[1]);
+                        Deadline task = new Deadline(deadlineSplit[0], date);
                         commandList.add(task);
                         System.out.println("Got it. I've added this task: ");
                         System.out.print(task);
@@ -176,7 +184,8 @@ public class Duke {
                     String substr = word.substring(6);
                     if (substr.contains(" /")) {
                         String[] eventSplit = substr.split(" /");
-                        Event task = new Event(eventSplit[0], eventSplit[1]);
+                        LocalDate date = LocalDate.parse(eventSplit[1]);
+                        Event task = new Event(eventSplit[0], date);
                         commandList.add(task);
                         System.out.println("Got it. I've added this task: ");
                         System.out.print(task);
