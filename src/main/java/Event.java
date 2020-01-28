@@ -8,11 +8,19 @@ public class Event extends Task {
         count++;
 
     }
+
+    public Event(String name, String time, boolean done) {
+        super(name);
+        this.done = done;
+        this.time = time;
+        count++;
+
+    }
     public String toString() {
         if (done) {
-            return ("[E][✓] " + name + " (at: "+time+ ")\n");
+            return ("[E][✓] " + name + " | at: "+time+ "\n");
         }
 
-        return ("[E][✗] " + name+ " (at: "+time+ ")\n");
+        return ("[E][✗] " + name+ " | at: "+time+ "\n");
     }
 }

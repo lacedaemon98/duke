@@ -8,11 +8,19 @@ public class Deadline extends Task {
         count++;
 
     }
+
+    public Deadline(String name, String time, boolean done) {
+        super(name);
+        this.done = done;
+        this.time = time;
+        count++;
+
+    }
     public String toString() {
         if (done) {
-            return ("[D][✓] " + name + " (by: "+time+ ")\n");
+            return ("[D][✓] " + name + " | by: "+time+ "\n");
         }
 
-        return ("[D][✗] " + name+ " (by: "+time+ ")\n");
+        return ("[D][✗] " + name+ " | by: "+time+ "\n");
     }
 }
